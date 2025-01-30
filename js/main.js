@@ -83,5 +83,30 @@ $(document).ready(function()
     $.scrollIt({
         topOffset:-50
     })
-    
-})
+    // Send Message button functionality
+  $('#sendMessageBtn').on('click', function() {
+    // 1. Get form values
+    var name = $('#contact input[placeholder="Your Name"]').val();
+    var email = $('#contact input[type="email"]').val();
+    var phone = $('#contact input[placeholder="Your Phone"]').val();
+    var subject = $('#contact input[placeholder="Subjrct"]').val();
+    var message = $('#contact textarea').val();
+
+    // 2. Basic validation (you can add more validation if needed)
+    if (!name ||!email ||!message) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+
+    // 3. Construct the email body
+    var emailBody = "Name: " + name + "\n";
+    emailBody += "Email: " + email + "\n";
+    emailBody += "Phone: " + phone + "\n";
+    emailBody += "Subject: " + subject + "\n";
+    emailBody += "Message: " + message;
+
+    // 4. Open the user's default email client with the message
+    var mailtoLink = "mailto:nashmapula@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(emailBody);
+    window.location.href = mailtoLink;
+  });
+});
